@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+    web:
+        image: img-web
+        
+        ports:
+            - 8090:80
+        volumes:
+            - "/home/vagrant/projects/bgapp/web:/var/www/html:ro"
+        networks:
+            - app-network
+        depends_on:
+            - db
+    db:
+        image: db-web
+        
+        networks:
+            - app-network
+        environment:
+            MYSQL_ROOT_PASSWORD: "12345"
+networks:
+    app-network:
